@@ -38,3 +38,5 @@ License
 ====
 
 AirPlayer is licensed under [The MIT License (MIT)][1]. Basically, this license grants you the right to use AirPlayer in any way you see fit. See [license.md](/license.md) for more info.
+
+[1]: https://opensource.org/licenses/MIT
