@@ -9,7 +9,7 @@ namespace AirPlayer.AirPlay
         public event AirplayServiceFoundDelegate AirplayServiceFound;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AirPlayDiscovery"/> class.
+        /// Used for getting all AirPlay devices on the local network
         /// </summary>
         public AirPlayDiscovery()
         {
@@ -22,7 +22,6 @@ namespace AirPlayer.AirPlay
             
             var results = await ZeroconfResolver.ResolveAsync(domains.Where(x => x.Key.Contains("airplay")).Select(g => g.Key));
 
-            //var results = await ZeroconfResolver.ResolveAsync("_airplay._tcp.local");
             foreach (var result in results)
             {
                 AirplayServiceFound?.Invoke(result);

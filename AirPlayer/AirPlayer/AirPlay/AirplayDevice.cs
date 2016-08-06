@@ -26,10 +26,6 @@ namespace AirPlayer.AirPlay
             Id = Guid.NewGuid();
         }
 
-        /// <summary>
-        ///     Gets the apple TV URL.
-        /// </summary>
-        /// <returns></returns>
         private Uri GetAppleTvUrl()
         {
             return new Uri("http://" + IpAddress + ":" + DevicePort + "/");

@@ -35,7 +35,6 @@ namespace AirPlayer.Controllers
             MimeNames = new ReadOnlyDictionary<string, string>(mimeNames);
         }
 
-
         [HttpGet]
         [Route("Play")]
         public HttpResponseMessage Play(string filePath)
