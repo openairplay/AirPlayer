@@ -1,27 +1,11 @@
 ﻿using System;
-using System.Linq;
-using System.Management;
 using System.ServiceModel;
-using System.Threading;
 using System.Web.Http;
 using System.Web.Http.SelfHost;
 using AirPlayer.Utils;
 
 namespace AirPlayer
 {
-
-    static public class Globals
-    {
-        static Globals()
-        {
-            // Create a semaphore with the amount of physical cores of the computer
-            var coreCount = new ManagementObjectSearcher("Select * from Win32_Processor").Get().Cast<ManagementBaseObject>().Sum(item => int.Parse(item["NumberOfCores"].ToString()));
-            Semaphore = new Semaphore(coreCount,coreCount);
-        }
-
-        public static Semaphore Semaphore;
-    }
-
     public class StreamingServer : IDisposable
     {
         private readonly HttpSelfHostServer httpSelfHostServer;
