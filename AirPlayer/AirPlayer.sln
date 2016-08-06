@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirPlayer", "AirPlayer\AirPlayer.csproj", "{ED002DB6-01ED-4489-A76C-189D86BD6144}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{5EACD49C-3675-4A64-89C4-BEB73B090D4A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ED002DB6-01ED-4489-A76C-189D86BD6144}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED002DB6-01ED-4489-A76C-189D86BD6144}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED002DB6-01ED-4489-A76C-189D86BD6144}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED002DB6-01ED-4489-A76C-189D86BD6144}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EACD49C-3675-4A64-89C4-BEB73B090D4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EACD49C-3675-4A64-89C4-BEB73B090D4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EACD49C-3675-4A64-89C4-BEB73B090D4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EACD49C-3675-4A64-89C4-BEB73B090D4A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
