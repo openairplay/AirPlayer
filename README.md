@@ -15,7 +15,7 @@ The project consist of a libary and a test client.
 ### FAQ ###
 
 > My airplay device is just loading
->> Try turning off the firewall on the device wich the application is running on
+>> Try turning off the firewall on the device which the application is running on
 
 ### Protocol ###
 Based off of Airplay Protocol info found at:
