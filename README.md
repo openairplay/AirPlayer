@@ -1,6 +1,6 @@
 # README #
 
-AirPlayer is a C# project for streaming photos and video to airplay devices. 
+AirPlayer is a .NET project for streaming photos, video and music to airplay devices. 
 
 AirPlayer is currently in alpha, and any help with development would be appreciated!
 
