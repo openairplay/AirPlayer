@@ -22,7 +22,14 @@ namespace AirPlayer
             );
             config.TransferMode = TransferMode.Streamed;
             httpSelfHostServer = new HttpSelfHostServer(config);
-            httpSelfHostServer.OpenAsync().Wait();
+            try
+            {
+                httpSelfHostServer.OpenAsync().Wait();
+            }
+            catch (Exception)
+            {
+               throw new ArgumentException("Remember to run as administrator");
+            }
         }
 
         public void Dispose()
