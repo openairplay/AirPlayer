@@ -1,4 +1,4 @@
-# README #
+# README Version 0.0.1 #
 
 AirPlayer is a .NET project for streaming photos, video and music to airplay devices. 
 
@@ -27,7 +27,7 @@ http://nto.github.com/AirPlay.html
 ### Working in current version ###
  - Video streaming
  - Photo streaming
- - Convert MKV to MP4(compatible format to stream to ariplay devices)
+ - Convert MKV to MP4(compatible format to stream to airplay devices)
  
 ### Todos ###
  - Support music streaming
