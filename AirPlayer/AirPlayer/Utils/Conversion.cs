@@ -1,20 +1,20 @@
 ﻿using System;
 using System.IO;
-using System.Net;
-using System.Net.Http;
 using System.Threading;
-using System.Web.Http;
-using AirPlayer.Utils;
 using NReco.VideoConverter;
 
-namespace AirPlayer.Controllers
+namespace AirPlayer.Utils
 {
-    public class ConversionController : ApiController
+    public static class Conversion
     {
+        public static void ConvertMkvToMp4(string filePath)
+        {
+            Globals.Semaphore.WaitOne();
+            new Thread(() => ConvertMkv2Mp4(filePath)) {IsBackground = true}.Start();
+            Globals.Semaphore.Release();
+        }
 
-        [HttpGet]
-        [Route("ConvertAllMKVFilesInFolderToMp4")]
-        public HttpResponseMessage ConvertAllMkvFilesInFolderToMp4(string folderPath)
+        public static void ConvertAllMkvInFolderToMp4(string folderPath)
         {
             foreach (var file in Directory.GetFiles(folderPath))
             {
@@ -23,22 +23,12 @@ namespace AirPlayer.Controllers
                     Globals.Semaphore.WaitOne();
                     ConvertMkv2Mp4(file);
                     Globals.Semaphore.Release();
-                }) {IsBackground = true}.Start();
+                })
+                {IsBackground = true}.Start();
             }
-
-            return new HttpResponseMessage(HttpStatusCode.OK);
         }
 
-        [HttpGet]
-        [Route("ConvertMKVToMp4")]
-        public HttpResponseMessage ConvertMKVToMp4(string filePath)
-        {
-            new Thread(() => ConvertMkv2Mp4(filePath)) { IsBackground = true }.Start();
-
-            return new HttpResponseMessage(HttpStatusCode.OK);
-        }
-
-        private Uri ConvertMkv2Mp4(string filePath)
+        static Uri ConvertMkv2Mp4(string filePath)
         {
             if (!filePath.EndsWith(".mkv"))
                 return null;
@@ -52,7 +42,7 @@ namespace AirPlayer.Controllers
             return new Uri(filename);
         }
 
-        private void ConvertProgressEvent(object sender, ConvertProgressEventArgs e)
+        static void ConvertProgressEvent(object sender, ConvertProgressEventArgs e)
         {
             Console.WriteLine("\n------------\nConverting...\n------------");
             Console.WriteLine("ProcessedDuration: {0}", e.Processed);

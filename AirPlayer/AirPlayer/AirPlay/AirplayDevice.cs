@@ -48,8 +48,9 @@ namespace AirPlayer.AirPlay
         ///     Starts a video.
         /// </summary>
         /// <param name="filePath">The URL of the video to play.</param>
+        /// <param name="server"></param>
         /// <param name="startPosition">The start position of the video. This value must be between 0 and 1</param>
-        public void StartVideo(Uri filePath, float startPosition = 0)
+        public void StartVideo(Uri filePath, Server server, float startPosition = 0)
         {
             StreamingVideo = true;
             if (startPosition > 1)
@@ -66,7 +67,7 @@ namespace AirPlayer.AirPlay
             //get the client stream to read data from.
             var clientStream = tcpClient.GetStream();
 
-            var url = ServerInfo.IpAddress + "/play?filePath=" + filePath.AbsolutePath;
+            var url = server.Address + "/play?filePath=" + filePath.AbsolutePath;
             var body = "Content-Location: " + url + "\n" +
                        "Start-Position: " + startPosition + "\n";
 

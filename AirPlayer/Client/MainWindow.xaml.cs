@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using AirPlayer;
 using AirPlayer.AirPlay;
+using AirPlayer.Utils;
 using Microsoft.Win32;
 using Zeroconf;
 
@@ -15,7 +16,7 @@ namespace Client
     public partial class MainWindow : Window
     {
         private readonly ObservableCollection<AirplayDevice> airplayDevices;
-        private StreamingServer streamingServer;
+        private readonly Server server;
 
         public MainWindow()
         {
@@ -24,7 +25,8 @@ namespace Client
             airPlayDevices.ItemsSource = airplayDevices;
             var airPlayDiscovery = new AirPlayDiscovery();
             airPlayDiscovery.AirplayServiceFound += ServiceDiscoveryAirplayServiceFound;
-            streamingServer = new StreamingServer();
+            server = new Server();
+            server.Start();
         }
 
         public AirplayDevice SelectedDevice { get; set; }
@@ -57,7 +59,7 @@ namespace Client
             var openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
             {
-                var videoThread = new Thread(() => SelectedDevice.StartVideo(new Uri(openFileDialog.FileName)))
+                var videoThread = new Thread(() => SelectedDevice.StartVideo(new Uri(openFileDialog.FileName), server))
                 {
                     IsBackground = true
                 };
@@ -88,6 +90,15 @@ namespace Client
             if (SelectedDevice.StreamingVideo)
             {
                 SelectedDevice.Stop = true;
+            }
+        }
+
+        private void btnMkvToMp4_Click(object sender, RoutedEventArgs e)
+        {
+            var openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                Conversion.ConvertMkvToMp4(openFileDialog.FileName);
             }
         }
     }

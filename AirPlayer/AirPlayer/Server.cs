@@ -6,13 +6,14 @@ using AirPlayer.Utils;
 
 namespace AirPlayer
 {
-    public class StreamingServer : IDisposable
+    public class Server : IDisposable
     {
         private readonly HttpSelfHostServer httpSelfHostServer;
 
-        public StreamingServer()
+        public Server(int port = 8080)
         {
-            var config = new HttpSelfHostConfiguration(ServerInfo.IpAddress);
+            Address = "http://" + Ext.GetIp4Address() + ":"+ port;
+            var config = new HttpSelfHostConfiguration(Address);
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
@@ -22,24 +23,32 @@ namespace AirPlayer
             );
             config.TransferMode = TransferMode.Streamed;
             httpSelfHostServer = new HttpSelfHostServer(config);
+        }
+
+        public string Address { get; }
+
+        /// <summary>
+        /// Start the selfhosing server
+        /// </summary>
+        public void Start()
+        {
             try
             {
                 httpSelfHostServer.OpenAsync().Wait();
             }
             catch (Exception)
             {
-               throw new ArgumentException("Remember to run as administrator");
+                throw new ArgumentException("Remember to run as administrator");
             }
         }
 
+        /// <summary>
+        /// Close and dispose the selfhosting server
+        /// </summary>
         public void Dispose()
         {
-            httpSelfHostServer.CloseAsync();
+            httpSelfHostServer.CloseAsync().Wait();
+            httpSelfHostServer.Dispose();
         }
-    }
-
-    public static class ServerInfo
-    {
-        public static readonly string IpAddress = "http://" + Ext.GetIp4Address() + ":8080";
     }
 }
