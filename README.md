@@ -1,4 +1,4 @@
-# README #
+# README Version 0.0.1 #
 
 AirPlayer is a .NET project for streaming photos, video and music to airplay devices. 
 
