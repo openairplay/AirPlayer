@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace AirPlayer.Utils
 {
-    static public class Globals
+    static internal class Globals
     {
         static Globals()
         {
@@ -13,6 +13,6 @@ namespace AirPlayer.Utils
             Semaphore = new Semaphore(coreCount,coreCount);
         }
 
-        public static Semaphore Semaphore;
+        internal static Semaphore Semaphore;
     }
 }
