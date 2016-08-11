@@ -16,7 +16,7 @@ namespace Client
     public partial class MainWindow : Window
     {
         private readonly ObservableCollection<AirplayDevice> airplayDevices;
-        private readonly Server server;
+        private readonly MediaStreamingServer mediaStreamingServer;
 
         public MainWindow()
         {
@@ -25,8 +25,7 @@ namespace Client
             airPlayDevices.ItemsSource = airplayDevices;
             var airPlayDiscovery = new AirPlayDiscovery();
             airPlayDiscovery.AirplayServiceFound += ServiceDiscoveryAirplayServiceFound;
-            server = new Server();
-            server.Start();
+            mediaStreamingServer = new MediaStreamingServer().Start();
         }
 
         public AirplayDevice SelectedDevice { get; set; }
@@ -59,7 +58,7 @@ namespace Client
             var openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
             {
-                var videoThread = new Thread(() => SelectedDevice.StartVideo(new Uri(openFileDialog.FileName), server))
+                var videoThread = new Thread(() => SelectedDevice.StartVideo(new Uri(openFileDialog.FileName), mediaStreamingServer))
                 {
                     IsBackground = true
                 };

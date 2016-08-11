@@ -6,14 +6,14 @@ using System.Net.Sockets;
 
 namespace AirPlayer.Utils
 {
-    public static class Ext
+    internal static class Ext
     {
-        public static byte[] LoadBytes(string path)
+        internal static byte[] LoadBytes(string path)
         {
             return File.ReadAllBytes(path);
         }
 
-        public static string GetIp4Address()
+        internal static string GetIp4Address()
         {
             var ip4Address = string.Empty;
 
