@@ -31,7 +31,6 @@ http://nto.github.com/AirPlay.html
  
 ### Todos ###
  - Support music streaming
- - Support Video Transcoding and Streaming on the fly
  - Improve Video support
  - Support streaming to multiple airplay devices
  - Write Tests
