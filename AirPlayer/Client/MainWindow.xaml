@@ -12,6 +12,8 @@
             <Button Width="100" Height="50" Name="btnStopVideo" Click="btnStopVideo_Click">Stop Video</Button>
             <Button  Width="100" Height="50" Name="btnImage" Click="btnImage_Click">Show Image</Button>
             <Button  Width="150" Height="50" Name="btnMkvToMp4" Click="btnMkvToMp4_Click">Convert MKV to MP4</Button>
+            <Button Width="155" Height="50" Name="btnGetStreamLink" Click="btnGetStreamLink_Click" >Get the link for a local video</Button>
+
         </StackPanel>
 
     </Grid>

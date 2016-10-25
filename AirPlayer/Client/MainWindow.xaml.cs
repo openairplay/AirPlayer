@@ -58,10 +58,11 @@ namespace Client
             var openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
             {
-                var videoThread = new Thread(() => SelectedDevice.StartVideo(new Uri(openFileDialog.FileName), mediaStreamingServer))
-                {
-                    IsBackground = true
-                };
+                var videoThread =
+                    new Thread(() => SelectedDevice.StartVideo(new Uri(openFileDialog.FileName), mediaStreamingServer))
+                    {
+                        IsBackground = true
+                    };
                 videoThread.Start();
             }
         }
@@ -99,6 +100,16 @@ namespace Client
             {
                 Conversion.ConvertMkvToMp4(openFileDialog.FileName);
             }
+        }
+
+        private void btnGetStreamLink_Click(object sender, RoutedEventArgs e)
+        {
+            var openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() != true) return;
+
+            var messageBoxText = mediaStreamingServer.Address + "/play?filePath=" + openFileDialog.FileName;
+            if (MessageBox.Show(messageBoxText, "Click OK to add the link to clipboard") == MessageBoxResult.OK)
+                Clipboard.SetText(messageBoxText);
         }
     }
 }
