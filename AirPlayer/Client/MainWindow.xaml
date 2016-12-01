@@ -6,13 +6,15 @@
         mc:Ignorable="d"
         Title="AirPlayer" Height="350" Width="525">
     <Grid>
-        <ListBox x:Name="airPlayDevices" DisplayMemberPath="Name" HorizontalAlignment="Left" Height="309" VerticalAlignment="Top" Width="142" SelectionChanged="airPlayDevices_SelectionChanged"/>
+        <ListBox x:Name="airPlayDevices" DisplayMemberPath="Name" HorizontalAlignment="Left" Height="309"
+                 VerticalAlignment="Top" Width="142" SelectionChanged="airPlayDevices_SelectionChanged" />
         <StackPanel>
             <Button Width="100" Height="50" Name="btnVideo" Click="btnVideo_Click">Stream Video</Button>
             <Button Width="100" Height="50" Name="btnStopVideo" Click="btnStopVideo_Click">Stop Video</Button>
-            <Button  Width="100" Height="50" Name="btnImage" Click="btnImage_Click">Show Image</Button>
-            <Button  Width="150" Height="50" Name="btnMkvToMp4" Click="btnMkvToMp4_Click">Convert MKV to MP4</Button>
-            <Button Width="155" Height="50" Name="btnGetStreamLink" Click="btnGetStreamLink_Click" >Get the link for a local video</Button>
+            <Button Width="100" Height="50" Name="btnImage" Click="btnImage_Click">Show Image</Button>
+            <Button Width="150" Height="50" Name="btnMkvToMp4" Click="btnReencodeToMp4_Click">Reencode Video to MP4</Button>
+            <Button Width="150" Height="50" Name="btnRemuxToMp4" Click="btnRemuxToMp4_Click">Remux Video to MP4</Button>
+            <Button Width="155" Height="50" Name="btnGetStreamLink" Click="btnGetStreamLink_Click">Get the link for a local video</Button>
 
         </StackPanel>
 

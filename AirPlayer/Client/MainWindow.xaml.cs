@@ -93,12 +93,21 @@ namespace Client
             }
         }
 
-        private void btnMkvToMp4_Click(object sender, RoutedEventArgs e)
+        private void btnReencodeToMp4_Click(object sender, RoutedEventArgs e)
         {
             var openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
             {
-                Conversion.ConvertMkvToMp4(openFileDialog.FileName);
+                Conversion.ReencodeVideoToMp4Async(openFileDialog.FileName);
+            }
+        }
+
+        private void btnRemuxToMp4_Click(object sender, RoutedEventArgs e)
+        {
+            var openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                Conversion.ReencodeVideoToMp4Async(openFileDialog.FileName);
             }
         }
 

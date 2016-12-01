@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -17,7 +16,10 @@ namespace AirPlayer.Utils
         {
             var ip4Address = string.Empty;
 
-            foreach (var ipa in Dns.GetHostAddresses(Dns.GetHostName()).Where(ipa => ipa.AddressFamily == AddressFamily.InterNetwork))
+            foreach (
+                var ipa in
+                    Dns.GetHostAddresses(Dns.GetHostName())
+                        .Where(ipa => ipa.AddressFamily == AddressFamily.InterNetwork))
             {
                 ip4Address = ipa.ToString();
                 break;

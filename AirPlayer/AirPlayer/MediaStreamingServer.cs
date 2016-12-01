@@ -12,26 +12,32 @@ namespace AirPlayer
 
         public MediaStreamingServer(int port = 8080)
         {
-            Address = "http://" + Ext.GetIp4Address() + ":"+ port;
+            Address = "http://" + Ext.GetIp4Address() + ":" + port;
             var config = new HttpSelfHostConfiguration(Address);
             config.MapHttpAttributeRoutes();
 
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
+            config.Routes.MapHttpRoute("DefaultApi", "api/{controller}/{id}", new {id = RouteParameter.Optional}
+                );
             config.TransferMode = TransferMode.Streamed;
             httpSelfHostServer = new HttpSelfHostServer(config);
         }
 
         /// <summary>
-        /// Get the address the selfhosting server is listening to
+        ///     Get the address the selfhosting server is listening to
         /// </summary>
         public string Address { get; }
 
         /// <summary>
-        /// Start the selfhosting server
+        ///     Close and dispose the selfhosting server
+        /// </summary>
+        public void Dispose()
+        {
+            httpSelfHostServer.CloseAsync().Wait();
+            httpSelfHostServer.Dispose();
+        }
+
+        /// <summary>
+        ///     Start the selfhosting server
         /// </summary>
         public MediaStreamingServer Start()
         {
@@ -47,7 +53,7 @@ namespace AirPlayer
         }
 
         /// <summary>
-        /// Start the selfhosting server async
+        ///     Start the selfhosting server async
         /// </summary>
         public MediaStreamingServer StartAsync()
         {
@@ -60,15 +66,6 @@ namespace AirPlayer
             {
                 throw new ArgumentException("Remember to run as administrator");
             }
-        }
-
-        /// <summary>
-        /// Close and dispose the selfhosting server
-        /// </summary>
-        public void Dispose()
-        {
-            httpSelfHostServer.CloseAsync().Wait();
-            httpSelfHostServer.Dispose();
         }
     }
 }

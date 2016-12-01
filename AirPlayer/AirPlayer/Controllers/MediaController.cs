@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Mime;
 using System.Web.Http;
+using AirPlayer.Utils;
 
 namespace AirPlayer.Controllers
 {
@@ -46,6 +47,17 @@ namespace AirPlayer.Controllers
 
             if (!fileInfo.Exists)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
+
+            string val;
+            if (!MimeNames.TryGetValue(Path.GetExtension(filePath), out val))
+            {
+                fileInfo = new FileInfo(Path.ChangeExtension(filePath, ".mp4"));
+                if (!fileInfo.Exists)
+                {
+                    var fileName = Conversion.RemuxVideoToMp4(filePath, true);
+                    fileInfo = new FileInfo(fileName);
+                }
+            }
 
             var totalLength = fileInfo.Length;
 

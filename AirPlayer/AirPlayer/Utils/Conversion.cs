@@ -7,42 +7,48 @@ namespace AirPlayer.Utils
 {
     public static class Conversion
     {
-        public static void ConvertMkvToMp4(string filePath)
+        public static void ReencodeVideoToMp4Async(string filePath)
         {
-            Globals.Semaphore.WaitOne();
-            new Thread(() => ConvertMkv2Mp4(filePath)) {IsBackground = true}.Start();
-            Globals.Semaphore.Release();
+            new Thread(() => ReencodeVideoToMp4(filePath)) {IsBackground = true}.Start();
         }
 
-        public static void ConvertAllMkvInFolderToMp4(string folderPath)
+        public static string ReencodeVideoToMp4(string filePath)
         {
-            foreach (var file in Directory.GetFiles(folderPath))
-            {
-                new Thread(() =>
-                {
-                    Globals.Semaphore.WaitOne();
-                    ConvertMkv2Mp4(file);
-                    Globals.Semaphore.Release();
-                })
-                {IsBackground = true}.Start();
-            }
-        }
-
-        static Uri ConvertMkv2Mp4(string filePath)
-        {
-            if (!filePath.EndsWith(".mkv"))
+            if (filePath.EndsWith(".mp4"))
                 return null;
 
-            var filename = filePath.Replace(".mkv", ".mp4");
+            var filename = Path.ChangeExtension(filePath, ".mp4");
 
             var ffMpeg = new FFMpegConverter();
             ffMpeg.ConvertProgress += ConvertProgressEvent;
             ffMpeg.ConvertMedia(filePath, filename, Format.mp4);
 
-            return new Uri(filename);
+            return filename;
         }
 
-        static void ConvertProgressEvent(object sender, ConvertProgressEventArgs e)
+        public static string RemuxVideoToMp4(string filePath, bool convertAudioToAcc = false,
+            bool convertAudioFast = false)
+        {
+            if (filePath.EndsWith(".mp4"))
+                return null;
+
+            var filename = Path.ChangeExtension(filePath, ".mp4");
+            var arguments = "-i " + '"' + filePath + '"' + " -codec copy ";
+            if (convertAudioToAcc)
+                arguments = arguments + "-c:a aac ";
+
+            arguments = arguments + '"' + filename + '"';
+            var ffMpeg = new FFMpegConverter();
+            ffMpeg.Invoke(arguments);
+            return filename;
+        }
+
+        public static void RemuxVideoToMp4Async(string filePath, bool convertAudioToAcc = false)
+        {
+            new Thread(() => RemuxVideoToMp4(filePath, convertAudioToAcc)) {IsBackground = true}.Start();
+        }
+
+        private static void ConvertProgressEvent(object sender, ConvertProgressEventArgs e)
         {
             Console.WriteLine("\n------------\nConverting...\n------------");
             Console.WriteLine("ProcessedDuration: {0}", e.Processed);

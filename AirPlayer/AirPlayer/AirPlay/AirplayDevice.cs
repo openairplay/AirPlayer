@@ -14,10 +14,6 @@ namespace AirPlayer.AirPlay
         public volatile bool Stop;
         public volatile bool StreamingVideo;
 
-        public string IpAddress { get; }
-        public Guid Id { get; }
-        public string Name { get; }
-
         public AirplayDevice(string ipAddress, string name)
         {
             ServicePointManager.Expect100Continue = false;
@@ -25,6 +21,10 @@ namespace AirPlayer.AirPlay
             Name = name;
             Id = Guid.NewGuid();
         }
+
+        public string IpAddress { get; }
+        public Guid Id { get; }
+        public string Name { get; }
 
         private Uri GetAppleTvUrl()
         {
