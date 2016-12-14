@@ -107,7 +107,7 @@ namespace Client
             var openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
             {
-                Conversion.RemuxVideoToMp4Async(openFileDialog.FileName);
+                Conversion.RemuxVideoToMp4Async(openFileDialog.FileName, true);
             }
         }
 
