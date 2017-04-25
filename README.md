@@ -7,7 +7,8 @@ AirPlayer is currently in alpha, and any help with development would be apprecia
 The project consist of a libary and a test client. 
 
 ### How do I get set up? ###
-
+* Include the nuget package and checkout the code example.
+* Nuget link https://www.nuget.org/packages/AirPlayer
 * Run as Administrator to run the self hosting server
 * Startup the AirPlayer client projekt
 * Thats it !
