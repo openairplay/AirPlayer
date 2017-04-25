@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>AirPlayer</id>
+    <version>0.0.1</version>
+    <authors>René Rotvig jensen</authors>
+    <owners>René Rotvig jensen</owners>
+    <licenseUrl>https://github.com/Rotvig/AirPlayer/blob/master/License.md</licenseUrl>
+    <projectUrl>https://github.com/Rotvig/AirPlayer</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>AirPlayer is a .NET project for streaming photos, video and music to airplay devices.</description>
+    <copyright>Copyright 2017</copyright>
+    <tags>Airplay</tags>
+  </metadata>
+  <files>
+	<file src="bin\Release\*.dll" target="lib" />
+  </files>
+</package>
